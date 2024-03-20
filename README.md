@@ -11,31 +11,21 @@ deployed backend : [Live Link](https://masai-library-18ky.onrender.com/)
 - **Express**
 - **MongoDB**
 
- ## Api end which we created for this backend
-
-this is documentation for API ends [Live Link](https://documenter.getpostman.com/view/31971527/2sA358dR27)
-
 ## Register User
-
 **POST /api/register**
-
 This endpoint is used to register a new user.
 
 ## Login User
-
 **POST /api/login**
-
 This endpoint is used to log in users.
 
 ## GET Books
 **GET /api/books**
-
 This endpoint should return a list of all available books. 
 
 ## Retrieve Books by ID 
 
 **GET /api/books/:id**
-
 This endpoint should return the details of a specific book identified by its ID.
 
 ## Retrieve Books by category
@@ -55,40 +45,25 @@ This endpoint should give only those books whose author is corey and the categor
 
 ## Add Menu Item to Books
 **POST /api/books**
-
 This endpoint should allow admin to add new books to the system. (Protected Route)
-PUT / PATCH
-/api/books/:id
-This endpoint should allow admin to update the details of a specific book identified by its ID. (Protected Route)
+
 ## Add Menu Item to Books
 **PATCH /api/books/:id**
 This endpoint should allow admin to update the details of a specific book identified by its ID. (Protected Route)
 
-## Delete Menu Item from Restaurant
-
-**DELETE /api/restaurants/:id/menu/:menuId**
-
-This endpoint removes a specific menu item from a restaurant.
+## Delete Menu Item from books
+**DELETE /api/books/:id**
+This endpoint should allow admin to delete a specific book identified by its ID. (Protected Route)
 
 ### Request Params
-- id: `restaurant_id`
-- itemId: `menu_item_id`
+- id: `books_id`
+- itemId: `orders_id`
 
 ## Add Order
-
 **POST /api/orders**
-
-This endpoint allows you to add a new order.
-  
-## Retrieve Order
-
-**GET /api/orders/:id**
-
-This endpoint retrieves the details of a specific order with the given order ID.
+This endpoint should allow the customer to place an order for a list of books. (Protected Route)
 
 ## Update Order Status
-
-**PUT /api/orders/:id**
-
-This endpoint allows you to update the status of a specific order.
+**GET /api/orders**
+This endpoint should allow admin to view all the orders placed so far with the user and book details. Populate both user and book data, and not just id’s. (Protected Route)
 
