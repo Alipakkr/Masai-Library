@@ -1,11 +1,13 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const Book = require('../models/book');
-const User = require('../models/user');
+const User = require('../../models/user.model');
+const orderRoutes=require("./order.routes.js")
+const bookRoutes=require("./book.routes.js")
 
-// Register a new user
+
+
 router.post('/register', async (req, res) => {
     const { name, email,password} = req.body
     const ExistUser = await User.findOne({ email })
@@ -25,8 +27,6 @@ router.post('/register', async (req, res) => {
         res.status(400).json({ error: err })
     }
 })
-
-// Login user and return JWT token
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
         if (user) {
             bcrypt.compare(password, user.password, (err, decoded) => {
                 if (decoded) {
-                    const access_token = jwt.sign({ name: "Alipa" }, "masai")
+                    const access_token = jwt.sign({ name: "Alipa", isAdmin:user.isAdmin }, "masai")
                     res.status(201).json({ msg: "Login Successfull", access_token })
                 } else {
                     res.status(201).json({ msg: "Wrong password,Try Again!!" })
@@ -48,52 +48,5 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Get all available books
-router.get('/books', async (req, res) => {
-  try {
-    const books = await Book.find();
-    res.status(200).json(books);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
-// Get details of a specific book by ID
-router.get('/books/:id', async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    if (!book) throw new Error('Book not found');
-    res.status(200).json(book);
-  } catch (error) {
-    res.status(404).json({ error: error.message });
-  }
-});
-
-// Get books by category
-router.get('/books', async (req, res) => {
-  try {
-    const category = req.query.category;
-    let query = {};
-    if (category) query.category = category;
-    const books = await Book.find(query);
-    res.status(200).json(books);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Get books by author and category
-router.get('/books', async (req, res) => {
-  try {
-    const author = req.query.author;
-    const category = req.query.category;
-    let query = {};
-    if (author) query.author = author;
-    if (category) query.category = category;
-    const books = await Book.find(query);
-    res.status(200).json(books);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-module.exports = router;
+module.exports = {router,bookRoutes,orderRoutes};
