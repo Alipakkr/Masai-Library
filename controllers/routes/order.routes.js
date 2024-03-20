@@ -4,7 +4,7 @@ const { authMiddleware,adminMiddleware } = require('../middlewares/admin.Middlew
 const Order = require('../../models/order.model');
 const orderRoutes=express.Router()
 
-orderRoutes.post('/order', authMiddleware, async (req, res) => {
+orderRoutes.post('/', authMiddleware, async (req, res) => {
   try {
     // Place order logic
     res.status(201).json({ message: "Order placed successfully" });
@@ -13,7 +13,7 @@ orderRoutes.post('/order', authMiddleware, async (req, res) => {
   }
 });
 
-orderRoutes.get('/orders', adminMiddleware, async (req, res) => {
+orderRoutes.get('/', adminMiddleware, async (req, res) => {
   try {
     const orders = await Order.find().populate('user').populate('books');
     res.status(200).json(orders);
@@ -21,7 +21,7 @@ orderRoutes.get('/orders', adminMiddleware, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-orderRoutes.post('/order', authMiddleware, async (req, res) => {
+orderRoutes.post('/', authMiddleware, async (req, res) => {
     try {
       // Assuming req.body contains the necessary information for placing an order
       const { userId, books, totalAmount } = req.body;
@@ -33,7 +33,7 @@ orderRoutes.post('/order', authMiddleware, async (req, res) => {
     }
   });
   
-  orderRoutes.get('/orders', adminMiddleware, async (req, res) => {
+  orderRoutes.get('/', adminMiddleware, async (req, res) => {
     try {
       const orders = await Order.find().populate('user').populate('books');
       res.status(200).json(orders);

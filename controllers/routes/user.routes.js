@@ -6,8 +6,6 @@ const User = require('../../models/user.model');
 const orderRoutes=require("./order.routes.js")
 const bookRoutes=require("./book.routes.js")
 
-
-
 router.post('/register', async (req, res) => {
     const { name, email,password} = req.body
     const ExistUser = await User.findOne({ email })
@@ -24,9 +22,11 @@ router.post('/register', async (req, res) => {
             res.status(201).json({ msg: "New user has been registered", new_user: user })
         })
     } catch (err) {
+        console.log(err," Error in register") //if is there error check with directly error in register
         res.status(400).json({ error: err })
     }
 })
+
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
@@ -47,6 +47,4 @@ router.post('/login', async (req, res) => {
         res.status(400).json({ error: err })
     }
 });
-
-
 module.exports = {router,bookRoutes,orderRoutes};
