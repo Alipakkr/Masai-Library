@@ -1,5 +1,5 @@
 # Masai-Library
-# THE TULAS
+
 
 ## Introduction
 The Masai Library is a comprehensive collection of resources designed to support your learning journey in the field of computer science and software engineering. 
@@ -8,10 +8,15 @@ The Masai Library is a comprehensive collection of resources designed to support
 
 ## Deplolyed App
 Frontend: https://masai-library-18ky.onrender.com/
-## Directory Structure
 
-## ├─ 
-## ├─
+## Directory Structure
+- controllers
+- models
+- .gitignore
+- README.md
+- db.js
+- index.js
+- package.json
 
 
 ## Installation & Getting started
@@ -19,7 +24,7 @@ Detailed instructions on how to install, configure, and get the project running.
 
 ```bash
 npm install 
-cd frontend 
-npm start
-cd src
-npm run start 
+npm run script
+```
+## All the things in backend so you have to start the backend and check with the postman 
+## MADE BY ALIPA 
